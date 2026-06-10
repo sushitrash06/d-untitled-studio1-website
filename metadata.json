@@ -1,0 +1,8 @@
+{
+    "name": "untitledD Studio-1",
+    "description": "Premium architecture and interior design portfolio for Yuditia and Rizky Chandra, featuring dynamic showcases, interactive space planners, and style consultations.",
+    "requestFramePermissions": [],
+    "majorCapabilities": [
+        "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+    ]
+}
