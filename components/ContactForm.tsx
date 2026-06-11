@@ -77,7 +77,7 @@ Terima kasih!`;
                   </div>
                   <div>
                     <span className="text-[9px] font-mono uppercase tracking-wider text-[#8D7654] block">EMAIL COORDINATE</span>
-                    <p className="text-sm font-semibold text-neutral-800 mt-1">UntitleDstudioOne@gmail.com</p>
+                    <p className="text-sm font-semibold text-neutral-800 mt-1">d.untitledstudio1@gmail.com</p>
                   </div>
                 </div>
 

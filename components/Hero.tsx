@@ -1,63 +1,44 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import {
-  Sparkles,
-  MapPin,
-  Layers,
-  Calendar,
-  ChevronRight,
-  Sliders,
-  RotateCw,
-  Check
-} from 'lucide-react';
-import { Project } from '@/app/types';
+import { useState, useEffect } from 'react';
+import { Check } from 'lucide-react';
 
-interface HeroProps {
-  projects: Project[];
-  setActiveSection: (section: string) => void;
-}
+const HERO_SLIDES = [
+  { src: '/img/header-image.jpg', alt: 'D-Untitled-1 Studio — premium architecture project showcase' },
+  { src: '/img/header-image2.png', alt: 'D-Untitled-1 Studio — modern interior design portfolio' },
+  { src: '/img/header-image3.jpg', alt: 'D-Untitled-1 Studio — wabi-sabi inspired residential design' },
+];
 
-export default function Hero({ projects, setActiveSection }: HeroProps) {
+
+export default function Hero() {
   // Slideshow state
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
 
   // Business Card 3D Flip state
-  const [isCardFlipped, setIsCardFlipped] = useState(false);
   const [copiedText, setCopiedText] = useState<'none' | 'email' | 'phone' | 'web'>('none');
 
   // Hero slideshow auto rotation (every 8s)
   useEffect(() => {
-    if (projects.length === 0) return;
     const interval = setInterval(() => {
-      setHeroSlideIndex((prev) => (prev + 1) % Math.min(3, projects.length));
+      setHeroSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 8000);
     return () => clearInterval(interval);
-  }, [projects]);
-
-  const handleCopy = (text: string, type: 'email' | 'phone' | 'web') => {
-    navigator.clipboard.writeText(text);
-    setCopiedText(type);
-    setTimeout(() => setCopiedText('none'), 3000);
-  };
-
-  const slideProjects = projects.slice(0, Math.min(3, projects.length));
+  }, []);
 
   return (
     <section id="home" className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden border-b border-studio-stone">
       {/* Animated Slide Backdrops */}
       <div className="absolute inset-0 z-0">
-        {slideProjects.map((proj, idx) => (
+        {HERO_SLIDES.map((slide, idx) => (
           <div
-            key={proj.id}
+            key={slide.src}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${heroSlideIndex === idx ? 'opacity-100' : 'opacity-0'}`}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-studio-beige via-studio-beige/90 to-transparent z-10" />
             <img
-              src={proj.mainImage}
-              alt={`${proj.title} — ${proj.category} project by D-Untitled-1 Studio in ${proj.location}`}
-              referrerPolicy="no-referrer"
-              loading="eager"
+              src={slide.src}
+              alt={slide.alt}
+              loading={idx === 0 ? 'eager' : 'lazy'}
               className="w-full h-full object-cover object-center scale-105 animate-subtle-zoom"
             />
           </div>
@@ -81,18 +62,16 @@ export default function Hero({ projects, setActiveSection }: HeroProps) {
 
 
           {/* Slider Dots indicators */}
-          {slideProjects.length > 1 && (
-            <div className="mt-12 flex items-center gap-3">
-              {slideProjects.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setHeroSlideIndex(idx)}
-                  className={`h-2 transition-all duration-300 ${heroSlideIndex === idx ? 'w-10 bg-studio-gold' : 'w-2 bg-studio-stone hover:bg-studio-gold'}`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-          )}
+          <div className="mt-12 flex items-center gap-3">
+            {HERO_SLIDES.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setHeroSlideIndex(idx)}
+                className={`h-2 transition-all duration-300 ${heroSlideIndex === idx ? 'w-10 bg-studio-gold' : 'w-2 bg-studio-stone hover:bg-studio-gold'}`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* SECTION 2A: TACTILE BUSINESS CARD HOLOGRAPHIC ROTATOR (Right Column) */}

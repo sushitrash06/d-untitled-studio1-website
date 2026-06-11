@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, MapPin, Maximize2, Calendar, User, ArrowLeft } from 'lucide-react';
+import { X, MapPin, Maximize2, Calendar, ArrowLeft } from 'lucide-react';
 import { Project, BriefDraft } from '@/app/types';
 import { Vibrant } from 'node-vibrant/browser';
 
@@ -40,7 +40,7 @@ export default function ProjectDetail({
       .getPalette()
       .then((palette) => {
         if (!active) return;
-        
+
         const swatches: { name: string; hex: string }[] = [];
         if (palette.Vibrant) swatches.push({ name: 'Vibrant Accent', hex: palette.Vibrant.hex });
         if (palette.DarkVibrant) swatches.push({ name: 'Deep Structure', hex: palette.DarkVibrant.hex });
@@ -49,7 +49,7 @@ export default function ProjectDetail({
           const lightSwatch = palette.LightVibrant || palette.LightMuted;
           if (lightSwatch) swatches.push({ name: 'Light Canvas', hex: lightSwatch.hex });
         }
-        
+
         // Fill up to 4 if missing
         if (swatches.length < 4) {
           const names = ['Vibrant Accent', 'Deep Structure', 'Muted Harmony', 'Light Canvas'];
@@ -59,7 +59,7 @@ export default function ProjectDetail({
             }
           });
         }
-        
+
         setDetectedColors(swatches.slice(0, 4));
       })
       .catch((err) => {
@@ -95,7 +95,7 @@ export default function ProjectDetail({
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        
+
         {/* Navigation Action Header */}
         <div className="flex items-center justify-between border-b border-studio-stone pb-6">
           <button
@@ -104,7 +104,7 @@ export default function ProjectDetail({
           >
             <ArrowLeft className="h-4 w-4" /> Back to Projects
           </button>
-          
+
           <button
             onClick={onBack}
             className="p-2 bg-studio-paper hover:bg-studio-stone text-studio-dark transition-all border border-studio-stone/60"
@@ -126,42 +126,15 @@ export default function ProjectDetail({
 
         {/* Hero image cover */}
         <div className="relative aspect-[16/7] md:aspect-[16/6] bg-neutral-900 overflow-hidden border border-studio-stone">
-          <img 
-            src={selectedProject.mainImage} 
-            alt={selectedProject.title} 
-            referrerPolicy="no-referrer" 
-            className="w-full h-full object-cover grayscale object-center opacity-90" 
+          <img
+            src={selectedProject.mainImage}
+            alt={selectedProject.title}
+            referrerPolicy="no-referrer"
+            className="w-full h-full object-cover grayscale object-center opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-studio-beige/30" />
         </div>
 
-        {/* Core Specs panel */}
-        <div className="grid grid-cols-2 md:grid-cols-4 border border-studio-stone bg-studio-paper divide-y-0 divide-x divide-studio-stone">
-          <div className="p-6 flex flex-col items-center justify-center text-center">
-            <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest leading-none">LOCATION</span>
-            <span className="text-sm font-semibold text-neutral-800 flex items-center gap-1.5 mt-3 font-serif uppercase">
-              <MapPin className="h-3.5 w-3.5 text-studio-gold" /> {selectedProject.location}
-            </span>
-          </div>
-          <div className="p-6 flex flex-col items-center justify-center text-center">
-            <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest leading-none">SQM SCALE FOOTPRINT</span>
-            <span className="text-sm font-semibold text-neutral-800 flex items-center gap-1.5 mt-3 font-serif uppercase">
-              <Maximize2 className="h-3.5 w-3.5 text-studio-gold" /> {selectedProject.area}
-            </span>
-          </div>
-          <div className="p-6 flex flex-col items-center justify-center text-center">
-            <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest leading-none">COMMISSION YEAR</span>
-            <span className="text-sm font-semibold text-neutral-800 flex items-center gap-1.5 mt-3 font-serif uppercase">
-              <Calendar className="h-3.5 w-3.5 text-studio-gold" /> {selectedProject.year}
-            </span>
-          </div>
-          <div className="p-6 flex flex-col items-center justify-center text-center">
-            <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest leading-none">ARCHITECTURE TEAM</span>
-            <span className="text-sm font-semibold text-neutral-800 flex items-center gap-1.5 mt-3 font-serif uppercase">
-              <User className="h-3.5 w-3.5 text-studio-gold" /> Yuditia & Rizky
-            </span>
-          </div>
-        </div>
 
         {/* Core Narrative Text Column Details */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pt-4">
@@ -233,16 +206,16 @@ export default function ProjectDetail({
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
             {selectedProject.gallery && selectedProject.gallery.length > 0 ? (
               selectedProject.gallery.map((imgUrl, colIdx) => (
-                <div 
-                  key={colIdx} 
+                <div
+                  key={colIdx}
                   onClick={() => setActiveLightboxImage(imgUrl)}
                   className="relative aspect-[4/3] bg-zinc-200 overflow-hidden border border-studio-stone cursor-zoom-in group/gallery shadow-xs hover:shadow-md transition-shadow duration-300"
                 >
-                  <img 
-                    src={imgUrl} 
-                    alt="Perspective render" 
-                    referrerPolicy="no-referrer" 
-                    className="w-full h-full object-cover grayscale group-hover/gallery:grayscale-0 group-hover/gallery:scale-103 transition-all duration-500" 
+                  <img
+                    src={imgUrl}
+                    alt="Perspective render"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover grayscale group-hover/gallery:grayscale-0 group-hover/gallery:scale-103 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-black/10 opacity-0 group-hover/gallery:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="text-[9px] uppercase font-mono tracking-widest bg-studio-dark/85 text-studio-beige px-3 py-2 border border-white/10 shadow-lg">
@@ -292,20 +265,20 @@ export default function ProjectDetail({
 
       {/* Fullscreen Photo Lightbox Modal */}
       {activeLightboxImage && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out animate-fade-in"
           onClick={() => setActiveLightboxImage(null)}
         >
-          <button 
+          <button
             className="absolute top-6 right-6 p-3 bg-zinc-900/80 hover:bg-studio-gold text-white hover:text-studio-dark transition-all rounded-none border border-zinc-800"
             onClick={() => setActiveLightboxImage(null)}
             title="Close Lightbox"
           >
             <X className="h-6 w-6" />
           </button>
-          <img 
-            src={activeLightboxImage} 
-            alt="Fullscreen render perspective" 
+          <img
+            src={activeLightboxImage}
+            alt="Fullscreen render perspective"
             referrerPolicy="no-referrer"
             className="max-w-full max-h-[90vh] object-contain shadow-2xl transition-transform duration-500 scale-100"
             onClick={(e) => e.stopPropagation()} // Prevent clicking on image from closing lightbox

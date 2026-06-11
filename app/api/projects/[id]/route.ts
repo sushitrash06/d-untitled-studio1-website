@@ -120,15 +120,16 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const userId = process.env.PROJECTS_USER_ID;
-  if (!userId) {
-    return NextResponse.json({ error: 'PROJECTS_USER_ID not configured in environment' }, { status: 500 });
+  const apiBase = process.env.API_BASE_URL;
+  if (!userId || !apiBase) {
+    return NextResponse.json({ error: 'PROJECTS_USER_ID or API_BASE_URL not configured in environment' }, { status: 500 });
   }
 
   // Next 15+ convention: params is a promise
   const { id } = await params;
 
   try {
-    const res = await fetch(`https://api.azkaxism.web.id/projects/public/${userId}/${id}`, {
+    const res = await fetch(`${apiBase}/projects/public/${userId}/${id}`, {
       next: { revalidate: 60 } // Cache detail for 60 seconds
     });
 

@@ -115,7 +115,7 @@ export default function App() {
       {/* DYNAMIC SECTION CONTENT */}
       <main className="flex-grow">
         {activeSection === 'home' && (
-          <Hero projects={projects} setActiveSection={setActiveSection} />
+          <Hero />
         )}
         {activeSection === 'portfolio' && (
           <Portfolio

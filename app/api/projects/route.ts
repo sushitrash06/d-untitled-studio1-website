@@ -117,12 +117,13 @@ function getTags(techStacks: string[] = [], role: string = ''): string[] {
 
 export async function GET() {
   const userId = process.env.PROJECTS_USER_ID;
-  if (!userId) {
-    return NextResponse.json({ error: 'PROJECTS_USER_ID not configured in environment' }, { status: 500 });
+  const apiBase = process.env.API_BASE_URL;
+  if (!userId || !apiBase) {
+    return NextResponse.json({ error: 'PROJECTS_USER_ID or API_BASE_URL not configured in environment' }, { status: 500 });
   }
 
   try {
-    const res = await fetch(`https://api.azkaxism.web.id/projects/public/${userId}`, {
+    const res = await fetch(`${apiBase}/projects/public/${userId}`, {
       next: { revalidate: 60 } // Cache list for 60 seconds
     });
 

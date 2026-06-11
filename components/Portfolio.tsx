@@ -126,7 +126,7 @@ export default function Portfolio({ projects, isProjectsLoading, onSelectProject
                     {/* Image */}
                     <img
                       src={project.mainImage}
-                      alt={`${project.title} — ${project.category} design project in ${project.location}, ${project.year}`}
+                      alt={`${project.title} — ${project.category} design project in ${project.location}`}
                       referrerPolicy="no-referrer"
                       loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
@@ -139,7 +139,6 @@ export default function Portfolio({ projects, isProjectsLoading, onSelectProject
                     <div>
                       <div className="flex justify-between items-center text-xs font-mono text-studio-bronze mb-2">
                         <span>{project.location}</span>
-                        <span>{project.year}</span>
                       </div>
                       <h3 className="font-serif text-xl md:text-2xl text-studio-dark group-hover:text-studio-gold transition-colors duration-300">
                         {project.title}
