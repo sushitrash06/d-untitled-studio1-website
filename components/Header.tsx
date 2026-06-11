@@ -221,8 +221,6 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
             </a>
           </nav>
         </div>
-
-        {/* Bottom Contact Drawer details */}
         <div className="space-y-4 pt-6 border-t border-studio-stone">
           <a
             href="https://wa.me/6281315390886"
