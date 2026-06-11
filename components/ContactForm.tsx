@@ -14,6 +14,25 @@ export default function ContactForm({ briefDraft, setBriefDraft }: ContactFormPr
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const messageText = `Halo Yuditia & Rizky, saya ingin berkonsultasi mengenai proyek desain baru.
+
+*Detail Brief Proyek:*
+- *Nama/Perusahaan:* ${briefDraft.name || '-'}
+- *Email:* ${briefDraft.email || '-'}
+- *No. Telepon/WA:* ${briefDraft.phone || '-'}
+- *Metode Kontak:* ${briefDraft.preferredContact || '-'}
+- *Jenis Layanan:* ${briefDraft.projectType || '-'}
+- *Gaya Desain (Vibe):* ${briefDraft.stylePreference || '-'}
+- *Skala Area:* ${briefDraft.areaSize} m²
+- *Catatan / Detail Proyek:* ${briefDraft.notes || '-'}
+
+Terima kasih!`;
+
+    const encodedText = encodeURIComponent(messageText);
+    const waUrl = `https://wa.me/6281315390886?text=${encodedText}`;
+
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
     setIsBriefSubmitted(true);
   };
 
@@ -62,15 +81,20 @@ export default function ContactForm({ briefDraft, setBriefDraft }: ContactFormPr
                   </div>
                 </div>
 
-                <div className="flex gap-4 items-start p-4 bg-studio-paper border border-studio-stone/80">
-                  <div className="p-2.5 bg-studio-beige rounded-none text-studio-bronze shrink-0">
+                <a
+                  href="https://wa.me/6281315390886"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex gap-4 items-start p-4 bg-studio-paper border border-studio-stone/80 hover:border-studio-gold hover:bg-studio-beige/35 transition-all duration-300 group"
+                >
+                  <div className="p-2.5 bg-studio-beige rounded-none text-studio-bronze shrink-0 group-hover:text-studio-gold transition-colors">
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
                     <span className="text-[9px] font-mono uppercase tracking-wider text-[#8D7654] block">COMMUNICATION LINE (WA)</span>
-                    <p className="text-sm font-semibold text-neutral-800 mt-1">+62 896-0128-6991</p>
+                    <p className="text-sm font-semibold text-neutral-800 mt-1 group-hover:text-studio-gold transition-colors">+62 813-1539-0886</p>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
 

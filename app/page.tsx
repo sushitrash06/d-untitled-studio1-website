@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { PORTFOLIO_PROJECTS } from './data';
 import { Project, BriefDraft } from './types';
 
 // Component imports
@@ -9,9 +8,10 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Portfolio from '@/components/Portfolio';
 import About from '@/components/About';
+import WhatWeOffer from '@/components/WhatWeOffer';
 import StyleQuiz from '@/components/StyleQuiz';
 import ContactForm from '@/components/ContactForm';
-import ProjectModal from '@/components/ProjectModal';
+import ProjectDetail from '@/components/ProjectDetail';
 import Footer from '@/components/Footer';
 import OurPeople from '@/components/OurPeople';
 
@@ -21,7 +21,7 @@ export default function App() {
 
   // Shared Portfolio states
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [projects, setProjects] = useState<Project[]>(PORTFOLIO_PROJECTS);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [isProjectsLoading, setIsProjectsLoading] = useState(true);
   const [isDetailLoading, setIsDetailLoading] = useState(false);
 
@@ -54,6 +54,7 @@ export default function App() {
   const handleSelectProject = async (project: Project) => {
     setSelectedProject(project);
     setIsDetailLoading(true);
+    setActiveSection('project-detail');
     try {
       const res = await fetch(`/api/projects/${project.id}`);
       if (!res.ok) {
@@ -123,6 +124,9 @@ export default function App() {
             onSelectProject={handleSelectProject}
           />
         )}
+        {activeSection === 'services' && (
+          <WhatWeOffer setActiveSection={setActiveSection} />
+        )}
         {(activeSection === 'about' || activeSection === 'philosophy') && (
           <About setActiveSection={setActiveSection} />
         )}
@@ -140,16 +144,16 @@ export default function App() {
         {activeSection === 'contact' && (
           <ContactForm briefDraft={briefDraft} setBriefDraft={setBriefDraft} />
         )}
+        {activeSection === 'project-detail' && (
+          <ProjectDetail
+            selectedProject={selectedProject}
+            onBack={() => setActiveSection('portfolio')}
+            isDetailLoading={isDetailLoading}
+            setBriefDraft={setBriefDraft}
+            setActiveSection={setActiveSection}
+          />
+        )}
       </main>
-
-      {/* SECTION 8: PROJECT DETAILS MODAL */}
-      <ProjectModal
-        selectedProject={selectedProject}
-        setSelectedProject={setSelectedProject}
-        isDetailLoading={isDetailLoading}
-        setBriefDraft={setBriefDraft}
-        setActiveSection={setActiveSection}
-      />
 
       {/* SECTION 9: FOOTER */}
       <Footer setActiveSection={setActiveSection} />

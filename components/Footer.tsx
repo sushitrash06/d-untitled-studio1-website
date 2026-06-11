@@ -61,6 +61,16 @@ export default function Footer({ setActiveSection }: FooterProps) {
               Selected Layouts
             </a>
             <a
+              href="#services"
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveSection('services');
+              }}
+              className="hover:text-studio-gold"
+            >
+              Our Services
+            </a>
+            <a
               href="#about"
               onClick={(e) => {
                 e.preventDefault();

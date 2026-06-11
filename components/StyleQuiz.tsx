@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Compass, ArrowUpRight } from 'lucide-react';
 import { Project, BriefDraft, StyleResult } from '@/app/types';
-import { STYLE_QUIZ_QUESTIONS, STYLE_RESULTS } from '@/app/data';
+import { STYLE_QUIZ_QUESTIONS, STYLE_RESULTS } from './QuizData';
 
 interface StyleQuizProps {
   projects: Project[];

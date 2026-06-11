@@ -11,12 +11,36 @@ interface PortfolioProps {
 }
 
 export default function Portfolio({ projects, isProjectsLoading, onSelectProject }: PortfolioProps) {
-  const [portfolioFilter, setPortfolioFilter] = useState<'all' | 'residential' | 'interior' | 'commercial' | 'concept'>('all');
+  const [portfolioFilter, setPortfolioFilter] = useState<'all' | 'architecture' | 'interior'>('all');
 
   const filteredProjects = projects.filter(p => {
     if (portfolioFilter === 'all') return true;
-    return p.category === portfolioFilter;
+    if (portfolioFilter === 'interior') return p.category === 'interior';
+    return p.category !== 'interior';
   });
+
+  const getBentoClasses = (index: number) => {
+    switch (index) {
+      case 0: // oasis-house
+        return 'md:col-span-1 md:row-span-1 h-[320px] md:h-auto';
+      case 1: // japandi-living
+        return 'md:col-span-1 md:row-span-1 h-[320px] md:h-auto';
+      case 2: // inbetween-office (Tiger layout position)
+        return 'md:col-span-2 md:row-span-2 h-[450px] md:h-auto';
+      case 3: // monolith-pavilion (Sunset layout position)
+        return 'md:col-span-2 md:row-span-2 h-[450px] md:h-auto';
+      case 4: // clay-kitchen
+        return 'md:col-span-1 md:row-span-1 h-[320px] md:h-auto';
+      case 5: // canopy-residence
+        return 'md:col-span-1 md:row-span-1 h-[320px] md:h-auto';
+      default:
+        return 'md:col-span-1 md:row-span-1 h-[320px] md:h-auto';
+    }
+  };
+
+  const gridClass = portfolioFilter === 'all'
+    ? 'grid grid-cols-1 md:grid-cols-4 md:grid-rows-3 md:auto-rows-[240px] gap-8'
+    : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
 
   return (
     <section id="portfolio" className="py-10 bg-studio-beige border-b border-studio-stone">
@@ -29,39 +53,38 @@ export default function Portfolio({ projects, isProjectsLoading, onSelectProject
               <Grid className="h-3 w-3 text-studio-gold" /> Curated Gallery
             </span>
             <h2 className="font-serif text-3xl md:text-5xl tracking-tight text-studio-dark">
-              Selected <span className="italic font-light">Architectural Works</span>
+              <span className="italic font-light">Our Projects</span>
             </h2>
           </div>
 
-          {/* Aesthetic Fine Art filter panels */}
+          {/* Aesthetic filter panels */}
           <div className="flex flex-wrap items-center gap-1 bg-studio-paper p-1 border border-studio-stone">
-            {(['all', 'residential', 'interior', 'commercial', 'concept'] as const).map((filter) => (
+            {(['all', 'architecture', 'interior'] as const).map((filter) => (
               <button
                 key={filter}
                 onClick={() => setPortfolioFilter(filter)}
                 className={`px-4 py-2 hover:text-studio-dark text-xs font-semibold uppercase tracking-[0.1em] transition-all duration-300 ${portfolioFilter === filter ? 'bg-studio-dark text-studio-beige border border-studio-dark' : 'text-neutral-500 hover:bg-studio-stone/20'}`}
               >
-                {filter}
+                {filter === 'all' ? 'All' : filter}
               </button>
             ))}
           </div>
         </div>
 
         {/* Asymmetric Image Layout Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-bento-grid">
+        <div className={gridClass} id="portfolio-bento-grid">
           {isProjectsLoading ? (
             // Premium Skeleton Loader Elements
             Array.from({ length: 6 }).map((_, idx) => {
-              const isLarge = idx === 0 || idx === 4;
               return (
                 <div
                   key={`skeleton-${idx}`}
-                  className={`bg-studio-paper border border-studio-stone/60 overflow-hidden flex flex-col justify-between animate-pulse ${isLarge ? 'md:col-span-2' : ''}`}
+                  className={`bg-studio-paper border border-studio-stone/60 overflow-hidden flex flex-col justify-between animate-pulse ${portfolioFilter === 'all' ? getBentoClasses(idx) : 'h-[380px]'}`}
                 >
                   {/* Photo Skeleton */}
-                  <div className="relative aspect-[16/10] bg-studio-stone/30 w-full"></div>
+                  <div className="relative overflow-hidden flex-grow min-h-[140px] bg-studio-stone/30 w-full"></div>
                   {/* Content Skeleton */}
-                  <div className="p-6 bg-studio-beige border-t border-studio-stone/40 flex flex-col justify-between grow">
+                  <div className="p-6 bg-studio-beige border-t border-studio-stone/40 flex flex-col justify-between shrink-0">
                     <div>
                       <div className="flex justify-between items-center mb-2">
                         <div className="h-3 bg-studio-stone/30 rounded w-1/4"></div>
@@ -87,16 +110,15 @@ export default function Portfolio({ projects, isProjectsLoading, onSelectProject
             </div>
           ) : (
             filteredProjects.map((project, index) => {
-              // Create dynamic bento shapes by spanning key items
-              const isLarge = index === 0 || index === 4;
+              const cardClass = portfolioFilter === 'all' ? getBentoClasses(index) : 'h-[380px]';
               return (
                 <div
                   key={project.id}
                   onClick={() => onSelectProject(project)}
-                  className={`group relative bg-studio-paper border border-studio-stone cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 hover:shadow-lg ${isLarge ? 'md:col-span-2' : ''}`}
+                  className={`group relative bg-studio-paper border border-studio-stone cursor-pointer overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 hover:shadow-lg ${cardClass}`}
                 >
                   {/* Photo Container */}
-                  <div className="relative aspect-[16/10] overflow-hidden w-full">
+                  <div className="relative overflow-hidden flex-grow min-h-[140px] w-full">
                     {/* Aesthetic overlay tag */}
                     <div className="absolute top-4 left-4 z-10 px-2.5 py-1 bg-studio-dark/80 backdrop-blur-md text-white font-mono text-[9px] uppercase tracking-widest">
                       {project.category}
@@ -106,13 +128,13 @@ export default function Portfolio({ projects, isProjectsLoading, onSelectProject
                       src={project.mainImage}
                       alt={project.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
+                      className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-studio-dark via-transparent to-transparent opacity-80 z-0" />
                   </div>
 
                   {/* Card Info Details */}
-                  <div className="p-6 bg-studio-beige border-t border-studio-stone flex flex-col justify-between grow">
+                  <div className="p-6 bg-studio-beige border-t border-studio-stone flex flex-col justify-between shrink-0">
                     <div>
                       <div className="flex justify-between items-center text-xs font-mono text-studio-bronze mb-2">
                         <span>{project.location}</span>
