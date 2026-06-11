@@ -25,11 +25,11 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
             className="flex items-center gap-3 group"
             id="brand-logo-anchor"
           >
-            <img src="/img/logo.png" className="w-30 text-studio-bronze" alt="Logo" />
+            <img src="/img/logo.png" className="w-30 text-studio-bronze" alt="D-Untitled-1 Studio — Architecture & Interior Design" />
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8 font-sans text-xs uppercase tracking-[0.15em] font-medium text-studio-dark">
+          <nav className="hidden lg:flex items-center gap-8 font-sans text-xs uppercase tracking-[0.15em] font-medium text-studio-dark" aria-label="Main navigation">
             <a
               href="#home"
               onClick={(e) => {
@@ -146,7 +146,7 @@ export default function Header({ activeSection, setActiveSection }: HeaderProps)
           </div>
 
           {/* Navigation Links list */}
-          <nav className="flex flex-col gap-4 font-sans text-xs uppercase tracking-[0.15em] font-medium text-studio-dark text-left">
+          <nav className="flex flex-col gap-4 font-sans text-xs uppercase tracking-[0.15em] font-medium text-studio-dark text-left" aria-label="Mobile navigation">
             <a
               href="#home"
               onClick={(e) => {

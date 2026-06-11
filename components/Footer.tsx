@@ -8,7 +8,7 @@ interface FooterProps {
 
 export default function Footer({ setActiveSection }: FooterProps) {
   return (
-    <footer className="bg-[#FAF8F5] text-studio-dark border-t border-studio-stone pt-20 pb-12 mt-auto">
+    <footer className="bg-[#FAF8F5] text-studio-dark border-t border-studio-stone pt-20 pb-12 mt-auto" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-studio-stone">
 
         {/* Main big Brand coordinates column */}
@@ -23,7 +23,7 @@ export default function Footer({ setActiveSection }: FooterProps) {
               className="flex items-center gap-3 group"
               id="brand-logo-anchor"
             >
-              <img src="/img/logo.png" className="w-30 text-studio-bronze" alt="Logo" />
+              <img src="/img/logo.png" className="w-30 text-studio-bronze" alt="D-Untitled-1 Studio — Architecture & Interior Design" />
             </a>
           </div>
 
@@ -39,7 +39,7 @@ export default function Footer({ setActiveSection }: FooterProps) {
         {/* Quick links columns */}
         <div className="md:col-span-3 space-y-4 text-left">
           <span className="text-[10px] uppercase font-mono tracking-widest text-[#8D7654] font-bold">Studio Exploration</span>
-          <div className="flex flex-col gap-2.5 text-xs text-neutral-600 font-medium">
+          <nav className="flex flex-col gap-2.5 text-xs text-neutral-600 font-medium" aria-label="Footer navigation">
             <a
               href="#home"
               onClick={(e) => {
@@ -90,7 +90,7 @@ export default function Footer({ setActiveSection }: FooterProps) {
             >
               Space Area Blueprints
             </a>
-          </div>
+          </nav>
         </div>
 
         <div className="md:col-span-4 space-y-4 text-left">
@@ -108,7 +108,6 @@ export default function Footer({ setActiveSection }: FooterProps) {
       {/* Minimal Bottom Legals bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-mono text-zinc-400 uppercase tracking-[0.15em]">
         <span>Design crafted to match physical business profiles with precision</span>
-        <span>Architect license: IAI 0128/6991/YUD</span>
       </div>
     </footer>
   );

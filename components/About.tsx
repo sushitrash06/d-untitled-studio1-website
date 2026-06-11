@@ -8,7 +8,7 @@ interface AboutProps {
 
 export default function About({ setActiveSection }: AboutProps) {
   return (
-    <section id="about" className="py-10 bg-[#FAF8F5] border-b border-studio-stone relative overflow-hidden">
+    <section id="about" className="py-10 bg-[#FAF8F5] border-b border-studio-stone relative overflow-hidden" aria-label="About D-Untitled-1 Studio">
       {/* Abstract background logo watermark */}
       <div className="absolute -right-20 top-20 opacity-[0.03] select-none pointer-events-none transform rotate-12">
         <a
@@ -47,7 +47,7 @@ export default function About({ setActiveSection }: AboutProps) {
                 className="flex items-center gap-3 group"
                 id="brand-logo-anchor"
               >
-                <img src="/img/logo.png" className="w-30 text-studio-bronze" alt="Logo" />
+                <img src="/img/logo.png" className="w-30 text-studio-bronze" alt="D-Untitled-1 Studio Logo — Architecture & Interior Design" />
               </a>
             </div>
 

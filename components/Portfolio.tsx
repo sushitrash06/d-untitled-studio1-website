@@ -43,7 +43,7 @@ export default function Portfolio({ projects, isProjectsLoading, onSelectProject
     : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
 
   return (
-    <section id="portfolio" className="py-10 bg-studio-beige border-b border-studio-stone">
+    <section id="portfolio" className="py-10 bg-studio-beige border-b border-studio-stone" aria-label="Our Architecture and Interior Design Projects">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Portfolio Header Title */}
@@ -126,8 +126,9 @@ export default function Portfolio({ projects, isProjectsLoading, onSelectProject
                     {/* Image */}
                     <img
                       src={project.mainImage}
-                      alt={project.title}
+                      alt={`${project.title} — ${project.category} design project in ${project.location}, ${project.year}`}
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-studio-dark via-transparent to-transparent opacity-80 z-0" />

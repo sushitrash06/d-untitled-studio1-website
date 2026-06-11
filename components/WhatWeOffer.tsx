@@ -57,7 +57,7 @@ const StylingFinishingIcon = () => (
 
 export default function WhatWeOffer({ setActiveSection }: WhatWeOfferProps) {
   return (
-    <section id="offers" className="py-20 bg-studio-beige border-b border-studio-stone">
+    <section id="offers" className="py-20 bg-studio-beige border-b border-studio-stone" aria-label="Our Architecture and Interior Design Services">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -105,7 +105,8 @@ export default function WhatWeOffer({ setActiveSection }: WhatWeOfferProps) {
             <div className="h-44 w-full overflow-hidden mt-6 relative border border-studio-stone/60">
               <img
                 src="/img/offer_arch_planning.png"
-                alt="Architecture Planning"
+                alt="Architecture Planning Service — conceptual layouts and site-responsive spatial flow design"
+                loading="lazy"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-102 group-hover:scale-105"
               />
             </div>
@@ -132,7 +133,8 @@ export default function WhatWeOffer({ setActiveSection }: WhatWeOfferProps) {
             <div className="h-44 w-full overflow-hidden mt-6 relative border border-studio-stone/60">
               <img
                 src="/img/offer_interior_design.png"
-                alt="Interior Design"
+                alt="Interior Design Service — material selection, moodboard, and furniture layout"
+                loading="lazy"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-102 group-hover:scale-105"
               />
             </div>
@@ -159,7 +161,8 @@ export default function WhatWeOffer({ setActiveSection }: WhatWeOfferProps) {
             <div className="h-44 w-full overflow-hidden mt-6 relative border border-studio-stone/60">
               <img
                 src="/img/offer_custom_furniture.png"
-                alt="Custom Furniture"
+                alt="Custom Furniture Service — bespoke built-ins and handcrafted furniture pieces"
+                loading="lazy"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-102 group-hover:scale-105"
               />
             </div>
@@ -186,7 +189,8 @@ export default function WhatWeOffer({ setActiveSection }: WhatWeOfferProps) {
             <div className="h-44 w-full overflow-hidden mt-6 relative border border-zinc-800 z-10">
               <img
                 src="/img/offer_styling_finishing.png"
-                alt="Styling & Finishing"
+                alt="Styling & Finishing Service — final layer decor curation with artwork and tactile accents"
+                loading="lazy"
                 className="w-full h-full object-cover grayscale transition-all duration-500 scale-102 group-hover:scale-105"
               />
             </div>

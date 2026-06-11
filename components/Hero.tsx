@@ -55,8 +55,9 @@ export default function Hero({ projects, setActiveSection }: HeroProps) {
             <div className="absolute inset-0 bg-gradient-to-r from-studio-beige via-studio-beige/90 to-transparent z-10" />
             <img
               src={proj.mainImage}
-              alt={proj.title}
+              alt={`${proj.title} — ${proj.category} project by D-Untitled-1 Studio in ${proj.location}`}
               referrerPolicy="no-referrer"
+              loading="eager"
               className="w-full h-full object-cover object-center scale-105 animate-subtle-zoom"
             />
           </div>
@@ -71,7 +72,7 @@ export default function Hero({ projects, setActiveSection }: HeroProps) {
 
 
           <h1 className="text-4xl md:text-6xl font-serif tracking-tight text-studio-dark leading-[1.1]" id="hero-main-title">
-            Crafting <span className="italic font-light">spatial poetry</span> out of raw natural materials.
+            Crafting <span className="italic font-light">spatial poetry</span> — Architecture &amp; Interior Design Studio
           </h1>
 
           <p className="text-base text-neutral-600 leading-relaxed font-sans mt-2">
